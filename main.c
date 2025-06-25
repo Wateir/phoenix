@@ -44,6 +44,18 @@ char process_unique_arg(char optarg[]) {
     }
 }
 
+void print_help() {
+    printf("\n");
+    printf("Usage: \n");
+    printf("  phoenix [options] \n");
+    printf("\n");
+    printf("Options:\n");
+    printf("  -l, --long          displays values even when they are zero\n");
+    printf("  -u, --unique <unit> displays a single unit (years, months, days, hours, minutes)\n");
+    printf("  -s, --lang <lang>   displays units in the specified language (fr, en)\n");
+    printf("\n");
+}
+
 int main(int argc, char *argv[]) {
     int rest, years;
     struct statx stats;
@@ -56,7 +68,8 @@ int main(int argc, char *argv[]) {
     struct option options[] = {
         { "long", no_argument, NULL, 'l' },
         { "lang", required_argument, NULL, 's' },
-        { "unique", required_argument, NULL, 'u' }
+        { "unique", required_argument, NULL, 'u' },
+        { "help", no_argument, NULL, 'h' }
     };
 
     // Strings
@@ -68,7 +81,7 @@ int main(int argc, char *argv[]) {
     char andStr[STR_LEN] = " and ";
 
     int opt;
-    while ((opt = getopt_long(argc, argv, "ls:u:", options, NULL)) != -1) {
+    while ((opt = getopt_long(argc, argv, "ls:u:h", options, NULL)) != -1) {
         switch (opt) {
             case 'l':
                 isLong = 1;
@@ -85,6 +98,10 @@ int main(int argc, char *argv[]) {
             case 'u':
                 isUnique = 1;
                 idUnique = process_unique_arg(optarg);
+                break;
+            case 'h':
+                print_help();
+                return 0;
 
                 break;
             default:
