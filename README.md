@@ -14,6 +14,13 @@ You can use the `--long` option to display all values, even when they are 0.
 0 years, 0 months, 10 days, 1 hours and 21 minutes
 ```
 
+### Raw mode
+Phoenix offers a parameter for retrieving raw values, i.e. the system creation date in timestamp (seconds).
+```
+❯ phoenix --raw
+1750001092
+```
+
 ### Only one unit
 Phoenix also offers the `--unique <unit>` option for displaying a single value. The option is therefore incompatible with `--long`.
 

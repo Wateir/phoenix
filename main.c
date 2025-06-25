@@ -53,6 +53,7 @@ void print_help() {
     printf("  -l, --long          displays values even when they are zero\n");
     printf("  -u, --unique <unit> displays a single unit (years, months, days, hours, minutes)\n");
     printf("  -s, --lang <lang>   displays units in the specified language (fr, en)\n");
+    printf("  -r, --raw           displays raw values\n");
     printf("\n");
 }
 
@@ -69,7 +70,8 @@ int main(int argc, char *argv[]) {
         { "long", no_argument, NULL, 'l' },
         { "lang", required_argument, NULL, 's' },
         { "unique", required_argument, NULL, 'u' },
-        { "help", no_argument, NULL, 'h' }
+        { "help", no_argument, NULL, 'h' },
+        { "raw", no_argument, NULL, 'r' }
     };
 
     // Strings
@@ -80,8 +82,14 @@ int main(int argc, char *argv[]) {
     char minuteStr[STR_LEN] = "minutes";
     char andStr[STR_LEN] = " and ";
 
+    statx(AT_FDCWD, "/", AT_SYMLINK_NOFOLLOW, STATX_BTIME, &stats);
+
+    current = time(NULL);
+    birth = (time_t) stats.stx_btime.tv_sec;
+    diff = difftime(current, birth);
+
     int opt;
-    while ((opt = getopt_long(argc, argv, "ls:u:h", options, NULL)) != -1) {
+    while ((opt = getopt_long(argc, argv, "ls:u:hr", options, NULL)) != -1) {
         switch (opt) {
             case 'l':
                 isLong = 1;
@@ -102,19 +110,16 @@ int main(int argc, char *argv[]) {
             case 'h':
                 print_help();
                 return 0;
-
+                break;
+            case 'r':
+                printf("%ld\n", birth);
+                return 0;
                 break;
             default:
                 return 1;
                 break;
         }
     }
-
-    statx(AT_FDCWD, "/", AT_SYMLINK_NOFOLLOW, STATX_BTIME, &stats);
-
-    current = time(NULL);
-    birth = (time_t) stats.stx_btime.tv_sec;
-    diff = difftime(current, birth);
 
     if (isUnique == 1) {
         char suffix[STR_LEN];
