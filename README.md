@@ -55,8 +55,8 @@ To install this tool, you need :
 ### Installation
 To install the tool, simply run this command sequence:
 ```bash
-git clone https://github.com/oriionn/downtime.git
-cd downtime
+git clone https://github.com/oriionn/phoenix.git
+cd phoenix
 make install
 ```
 
@@ -70,7 +70,7 @@ To build this tool, you need :
 ### Building
 To build the tool, simply execute this command sequence:
 ```bash
-git clone https://github.com/oriionn/downtime.git
-cd downtime
+git clone https://github.com/oriionn/phoenix.git
+cd phoenix
 make build
 ```
