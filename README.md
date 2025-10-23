@@ -82,8 +82,14 @@ cd phoenix
 make build
 ```
 #### Arch Linux
+Installation
 ```bash
 mkdir phoenix && cd ./phoenix
 curl -L -o PKGBUILD  https://github.com/Wateir/phoenix/blob/main/PKGBUILD
-makepkg -si
+makepkg -si --cleanbuild
+rm -fr phoenix
+```
+Uninstall 
+```bash
+pacman -R phoenix-git
 ```
