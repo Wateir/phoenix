@@ -81,3 +81,9 @@ git clone https://github.com/oriionn/phoenix.git
 cd phoenix
 make build
 ```
+#### Arch Linux
+```bash
+mkdir phoenix && cd ./phoenix
+curl -L -o PKGBUILD  https://github.com/Wateir/phoenix/blob/main/PKGBUILD
+makepkg -si
+```
