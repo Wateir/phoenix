@@ -19,7 +19,9 @@ pkgver() {
 }
 
 package() {
-
   cd "$srcdir/phoenix"
   make build
+
+  install -Dm755 "phoenix" "$pkgdir/usr/bin/phoenix"
 }
+
