@@ -84,7 +84,7 @@ make build
 #### Arch Linux
 Installation
 ```bash
-git clone https://github.com/Wateir/phoenix && cd phoenix
+git clone https://github.com/oriionn/phoenix && cd phoenix
 makepkg -si --cleanbuild
 cd .. && rm -fr phoenix
 ```
